@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pokémon Agents — your coding agents, as Pokémon</title>
+<meta name="description" content="Pokémon Agents turns each Claude Code session into a Pokémon in a top-down town. Ditch the wall of logs — see who's working, who's done, and who needs you at a glance. Open source." />
+<meta name="theme-color" content="#E9F1FB" />
+<link rel="canonical" href="https://pokemonagents.dev" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://pokemonagents.dev" />
+<meta property="og:title" content="Pokémon Agents — your coding agents, as Pokémon" />
+<meta property="og:description" content="Ditch the wall of logs. Watch your Claude Code agents level up and evolve in real time. Catch badges along the way. Open source." />
+<meta property="og:image" content="https://pokemonagents.dev/assets/og-pokemon-agents.png" />
+<meta property="og:image:width" content="1600" />
+<meta property="og:image:height" content="900" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Pokémon Agents — your coding agents, as Pokémon" />
+<meta name="twitter:description" content="Ditch the wall of logs. Watch your Claude Code agents level up and evolve in real time. Catch badges along the way." />
+<meta name="twitter:image" content="https://pokemonagents.dev/assets/og-pokemon-agents.png" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2317284A'/%3E%3Ccircle cx='16' cy='16' r='7' fill='none' stroke='%23F2B417' stroke-width='2.5'/%3E%3Cline x1='9' y1='16' x2='23' y2='16' stroke='%23F2B417' stroke-width='2.5'/%3E%3Ccircle cx='16' cy='16' r='2.4' fill='%23E9F1FB'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Press+Start+2P&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    /* Pokémon Agents palette — a Pokémon Crystal / Violet City read: pale
+       crystal-blue paper, deep navy ink, badge-gold spark. Same tokens the
+       vhenjoseph.com feature card and the social assets use, so it's one brand. */
+    --ground:#E9F1FB; --surface:#FFFFFF; --wash:#DCE8F8;
+    --ink:#17284A; --ink-2:#3D507A; --ink-3:#7686A6;
+    --accent:#2F6DB5; --sky:#BFD9F2; --gold:#F2B417; --screen:#0E1B33;
+    --line:rgba(23,40,74,.14); --line-2:rgba(23,40,74,.08);
+    --contrast-bg:#0E1B33; --contrast-ink:#EAF2FD; --contrast-body:#AFC2DE; --contrast-muted:#6E82A6; --contrast-line:rgba(234,242,253,.16);
+    --font-sans:'Hanken Grotesk',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;
+    --font-mono:'Space Mono',ui-monospace,'SF Mono',Menlo,monospace;
+    --font-pixel:'Press Start 2P',ui-monospace,monospace;
+    --text-h2:clamp(26px,4.2vw,44px); --text-lead:clamp(19px,2vw,25px); --text-body:clamp(17px,1.5vw,20px);
+    --gutter:clamp(22px,5vw,64px); --section-y:clamp(56px,9vw,104px); --content-max:1120px;
+    --radius-pill:100px; --radius-card:18px;
+    --ease:cubic-bezier(.22,.61,.24,1);
+    --shadow-cta:0 16px 34px -18px color-mix(in srgb, var(--ink) 60%, transparent);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--ground); color:var(--ink-2); font-family:var(--font-sans); font-size:18px; line-height:1.65; -webkit-font-smoothing:antialiased; overflow-x:hidden;
+    background-image:radial-gradient(var(--sky) 1px, transparent 1.4px); background-size:22px 22px; background-attachment:fixed; }
+  ::selection { background:var(--ink); color:var(--ground); }
+  a { color:var(--ink); text-decoration:none; }
+  img { max-width:100%; display:block; }
+  .wrap { max-width:var(--content-max); margin:0 auto; padding:0 var(--gutter); }
+  .sec { padding:var(--section-y) 0; scroll-margin-top:80px; }
+  h1,h2,h3 { text-wrap:balance; }
+  p { text-wrap:pretty; }
+
+  /* masthead */
+  .mast { position:sticky; top:0; z-index:60; background:color-mix(in srgb, var(--ground) 82%, transparent); backdrop-filter:saturate(1.1) blur(12px); -webkit-backdrop-filter:saturate(1.1) blur(12px); border-bottom:1px solid var(--line-2); }
+  .mast-in { max-width:var(--content-max); margin:0 auto; padding:0 var(--gutter); height:64px; display:flex; align-items:center; justify-content:space-between; gap:20px; }
+  .wordmark { display:inline-flex; align-items:center; gap:10px; font-family:var(--font-pixel); font-size:13px; color:var(--ink); letter-spacing:0; }
+  .wordmark .ball { width:15px; height:15px; flex:none; }
+  .nav { display:flex; gap:24px; font-size:14px; align-items:center; }
+  .mast-link { position:relative; color:var(--ink-3); padding:6px 0; transition:color .2s var(--ease); }
+  .mast-link::after { content:""; position:absolute; left:0; bottom:0; width:100%; height:1.5px; background:var(--accent); transform:scaleX(0); transform-origin:left; transition:transform .25s var(--ease); }
+  .mast-link:hover { color:var(--ink); }
+  .mast-link:hover::after { transform:scaleX(1); }
+
+  /* eyebrow */
+  .eyebrow { font-family:var(--font-mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3); line-height:1; }
+  .eyebrow-row { display:inline-flex; align-items:center; gap:10px; }
+  .eyebrow-row .live { width:8px; height:8px; border-radius:50%; background:var(--gold); position:relative; flex:none; }
+  .eyebrow-row .live::after { content:""; position:absolute; inset:0; border-radius:50%; background:var(--gold); animation:pulse 2.4s var(--ease) infinite; }
+  .eyebrow-row .rule { width:46px; height:1px; background:var(--line); }
+  @keyframes pulse { 0%{transform:scale(1);opacity:.55} 70%,100%{transform:scale(2.7);opacity:0} }
+
+  /* buttons */
+  .btn { display:inline-flex; align-items:center; gap:10px; padding:13px 22px; font-family:var(--font-sans); font-size:15px; font-weight:600; line-height:1; white-space:nowrap; border-radius:var(--radius-pill); cursor:pointer; border:1px solid var(--ink); transition:transform .4s var(--ease), background .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease), box-shadow .4s var(--ease); }
+  .btn-primary { background:var(--ink); color:var(--ground); border-color:var(--ink); }
+  .btn-ghost { background:transparent; color:var(--ink); border-color:var(--line); }
+  .btn:hover { transform:translateY(-3px); box-shadow:var(--shadow-cta); }
+  .btn-ghost:hover { background:var(--ink); color:var(--ground); border-color:var(--ink); }
+  .btn svg { display:block; }
+
+  /* hero */
+  .hero-grid { display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,1fr); gap:clamp(28px,5vw,66px); align-items:center; padding:clamp(44px,8vh,92px) 0 clamp(30px,5vw,56px); }
+  .hero h1 { font-family:var(--font-pixel); font-weight:400; color:var(--ink); font-size:clamp(26px,3.6vw,44px); line-height:1.5; letter-spacing:0; margin:22px 0 0; }
+  .hero h1 em { font-style:normal; color:var(--accent); }
+  .hero-lead { margin-top:clamp(22px,3vw,30px); max-width:40ch; font-size:var(--text-lead); line-height:1.5; color:var(--ink-2); }
+  .hero-lead b { color:var(--ink); font-weight:700; }
+  .hero-cta { display:flex; flex-wrap:wrap; gap:12px; margin-top:clamp(26px,3vw,34px); }
+  .hero-media { display:flex; justify-content:center; align-items:center; }
+
+  /* a handheld-style frame echoing the social cards */
+  .device { width:100%; max-width:460px; background:linear-gradient(165deg,#46474a,#1c1c1e); border-radius:clamp(20px,4vw,38px);
+    padding:clamp(10px,2.3vw,17px); box-shadow:0 36px 70px -30px rgba(14,27,51,.55), inset 0 0 0 1px rgba(255,255,255,.08); }
+  .device-cam { width:100%; display:flex; justify-content:center; padding-bottom:clamp(6px,1.4vw,10px); }
+  .device-cam::before { content:""; width:6px; height:6px; border-radius:50%; background:#0a0a0b; box-shadow:inset 0 0 0 1px rgba(255,255,255,.1); }
+  .device-screen { border-radius:clamp(12px,2.8vw,22px); overflow:hidden; background:#000; line-height:0; }
+  .device-screen img { width:100%; height:auto; display:block; image-rendering:pixelated; }
+
+  /* strip under hero */
+  .strip { border-top:1px solid var(--line-2); border-bottom:1px solid var(--line-2); background:color-mix(in srgb, var(--wash) 60%, transparent); }
+  .strip-in { max-width:var(--content-max); margin:0 auto; padding:16px var(--gutter); display:flex; flex-wrap:wrap; align-items:center; gap:clamp(14px,4vw,40px); }
+  .strip .label { font-family:var(--font-mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3); }
+  .strip .items { display:flex; flex-wrap:wrap; gap:clamp(14px,3vw,32px); font-size:15px; font-weight:500; color:var(--ink-2); }
+  .strip .items span { display:inline-flex; align-items:center; gap:8px; }
+  .strip .items .d { width:5px; height:5px; border-radius:50%; background:var(--accent); flex:none; }
+
+  /* section heads */
+  .sec-head { max-width:60ch; margin-bottom:clamp(34px,5vw,54px); }
+  .sec-head h2 { font-family:var(--font-pixel); font-weight:400; font-size:clamp(20px,2.7vw,30px); line-height:1.45; letter-spacing:0; color:var(--ink); margin:14px 0 0; }
+  .sec-head .support { font-size:var(--text-body); color:var(--ink-2); line-height:1.6; margin-top:18px; max-width:56ch; }
+  .sec-head .support b { color:var(--ink); font-weight:700; }
+
+  /* feature cards */
+  .features { display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(16px,2.4vw,26px); }
+  .feat { background:var(--surface); border:1px solid var(--line-2); border-radius:var(--radius-card); padding:clamp(24px,2.6vw,32px); box-shadow:0 18px 40px -30px rgba(23,40,74,.35); }
+  .feat .fnum { font-family:var(--font-pixel); font-size:13px; color:var(--gold); }
+  .feat h3 { font-family:var(--font-sans); font-weight:700; font-size:clamp(18px,1.7vw,21px); color:var(--ink); margin:16px 0 10px; letter-spacing:-.01em; line-height:1.2; }
+  .feat p { font-size:16px; line-height:1.56; color:var(--ink-2); }
+
+  /* run it */
+  .run { background:var(--contrast-bg); color:var(--contrast-ink); border-radius:clamp(18px,2.6vw,26px); padding:clamp(30px,4vw,54px); background-image:radial-gradient(rgba(191,217,242,.09) 1px, transparent 1.4px); background-size:22px 22px; }
+  .run .eyebrow { color:var(--contrast-muted); }
+  .run h2 { font-family:var(--font-pixel); font-weight:400; font-size:clamp(18px,2.4vw,26px); line-height:1.5; color:var(--contrast-ink); margin:14px 0 8px; }
+  .run p { color:var(--contrast-body); font-size:16px; max-width:58ch; margin-bottom:26px; }
+  .run p a { color:var(--contrast-ink); text-decoration:underline; text-underline-offset:3px; text-decoration-color:var(--contrast-muted); }
+  .code { font-family:var(--font-mono); font-size:clamp(13px,1.4vw,15px); line-height:2; background:rgba(0,0,0,.28); border:1px solid var(--contrast-line); border-radius:12px; padding:20px 22px; color:var(--contrast-ink); overflow-x:auto; }
+  .code .c { color:var(--contrast-muted); }
+  .code .g { color:var(--gold); }
+  .run-meta { margin-top:20px; font-size:13px; color:var(--contrast-muted); font-family:var(--font-mono); letter-spacing:.02em; }
+
+  /* footer */
+  .footer { background:var(--contrast-bg); color:var(--contrast-ink); margin-top:clamp(40px,6vw,80px); }
+  .footer-in { max-width:var(--content-max); margin:0 auto; padding:clamp(56px,9vw,100px) var(--gutter) clamp(44px,7vw,72px); }
+  .footer .kick { font-family:var(--font-mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--contrast-muted); margin-bottom:14px; }
+  .footer h2 { font-family:var(--font-pixel); font-weight:400; color:var(--contrast-ink); font-size:clamp(20px,3vw,32px); line-height:1.5; max-width:20ch; margin:0 0 26px; }
+  .footer h2 em { font-style:normal; color:var(--gold); }
+  .link-pills { display:flex; flex-wrap:wrap; gap:12px; margin-bottom:40px; }
+  .link-pill { display:inline-flex; align-items:center; gap:9px; font-family:var(--font-sans); font-size:16px; font-weight:500; padding:12px 20px; border-radius:var(--radius-pill); border:1px solid var(--contrast-line); color:var(--contrast-ink); transition:background .2s var(--ease), color .2s var(--ease); }
+  .link-pill svg { color:var(--contrast-muted); transition:color .2s var(--ease); }
+  .link-pill:hover { background:var(--contrast-ink); color:var(--contrast-bg); }
+  .link-pill:hover svg { color:var(--contrast-bg); }
+  .disclaimer { font-size:13px; line-height:1.5; color:var(--contrast-muted); max-width:62ch; padding-top:26px; border-top:1px solid var(--contrast-line); }
+  .colophon { margin-top:16px; display:flex; flex-wrap:wrap; gap:6px 26px; font-family:var(--font-mono); font-size:12px; color:var(--contrast-muted); }
+
+  @media (max-width:860px) { .features { grid-template-columns:1fr; } }
+  @media (max-width:768px) {
+    .hero-grid { grid-template-columns:1fr; }
+    .hero-grid .hero-media { order:-1; }
+    .nav .mast-link { display:none; }
+  }
+  @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } .eyebrow-row .live::after { animation:none; } }
+</style>
+</head>
+<body>
+
+<header class="mast">
+  <div class="mast-in">
+    <a href="#top" class="wordmark">
+      <svg class="ball" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="none" stroke="#17284A" stroke-width="3"/><line x1="3" y1="16" x2="29" y2="16" stroke="#17284A" stroke-width="3"/><circle cx="16" cy="16" r="4.4" fill="#F2B417" stroke="#17284A" stroke-width="3"/></svg>
+      <span>Pokémon Agents</span>
+    </a>
+    <nav class="nav">
+      <a href="#how" class="mast-link">how it works</a>
+      <a href="#run" class="mast-link">run it</a>
+      <a class="btn btn-primary" href="https://github.com/techykamatis/pokemon-agents" target="_blank" rel="noopener" style="padding:9px 16px;font-size:14px">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <div class="wrap">
+    <section class="hero hero-grid">
+      <div>
+        <span class="eyebrow-row"><span class="live"></span><span class="eyebrow">Open source · for Claude Code</span><span class="rule"></span></span>
+        <h1>Your coding agents,<br>as <em>Pokémon</em>.</h1>
+        <p class="hero-lead"><b>Ditch the wall of logs.</b> Watch your agents level up and evolve in real time. Catch badges along the way!</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="https://github.com/techykamatis/pokemon-agents" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49l-.01-1.9c-2.78.62-3.37-1.2-3.37-1.2-.46-1.18-1.11-1.5-1.11-1.5-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.9 1.56 2.35 1.11 2.92.85.09-.66.35-1.11.63-1.37-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05a9.36 9.36 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.81-4.57 5.06.36.31.68.94.68 1.9l-.01 2.81c0 .27.18.6.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg>
+            <span>View on GitHub</span>
+          </a>
+          <a class="btn btn-ghost" href="#how">See how it works</a>
+        </div>
+      </div>
+      <div class="hero-media">
+        <div class="device">
+          <div class="device-cam"></div>
+          <div class="device-screen">
+            <img src="assets/pokemon-agents-demo.gif" width="640" height="576" alt="Pokémon Agents demo: Claude Code sessions as creatures around a top-down town, levelling up and evolving as the work lands, with one walking up to ask a question." />
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- STRIP -->
+  <div class="strip">
+    <div class="strip-in">
+      <span class="label">What it runs on</span>
+      <div class="items"><span><span class="d"></span>Claude Code (terminal)</span><span><span class="d"></span>Claude desktop app</span><span><span class="d"></span>macOS · Node 22</span></div>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="wrap">
+    <section id="how" class="sec">
+      <div class="sec-head">
+        <span class="eyebrow-row"><span class="eyebrow">How it works</span></span>
+        <h2>One town. One Pokémon per project.</h2>
+        <p class="support">When you've got a dozen Claude Code sessions open, the hard part is knowing which one needs you. Pokémon Agents turns each session into a Pokémon in a top-down town, so the state of your work is something you <b>glance at</b> instead of dig for.</p>
+      </div>
+      <div class="features">
+        <div class="feat">
+          <div class="fnum">01</div>
+          <h3>See it at a glance</h3>
+          <p>Who's working, who's finished, and who's stuck. The one waiting on a decision walks up to you with a "!" — no more scanning a wall of terminals.</p>
+        </div>
+        <div class="feat">
+          <div class="fnum">02</div>
+          <h3>It grows on real work</h3>
+          <p>Each project is one Pokémon, kept for good. It levels up, earns badges and evolves through the real Gen 1 &amp; 2 tree — driven by your actual commits, merges and green test runs.</p>
+        </div>
+        <div class="feat">
+          <div class="fnum">03</div>
+          <h3>Answer without leaving</h3>
+          <p>From inside the game, reply to a waiting session, jump to its terminal, start an agent on a goal, and look back at everything that happened while you were away.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- RUN IT -->
+  <div class="wrap">
+    <section id="run" class="sec" style="padding-top:0">
+      <div class="run">
+        <span class="eyebrow-row"><span class="eyebrow">Run it · about two minutes</span></span>
+        <h2>Free, open source, yours.</h2>
+        <p>You'll need macOS, Node 22 and Claude Code. Clone the repo and run three commands — the first start reads your Claude history once, then just follows what's new. Everything stays on your machine. <a href="https://github.com/techykamatis/pokemon-agents" target="_blank" rel="noopener">Full guide on GitHub →</a></p>
+        <div class="code"><span class="c"># clone, then:</span><br>npm install<br>npm run setup   <span class="c"># git hooks + fetch the assets</span><br>npm start       <span class="c"># open </span><span class="g">http://127.0.0.1:7880</span></div>
+        <div class="run-meta">MIT licensed · no account, no cloud, no telemetry</div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer-in">
+    <div class="kick">Ready player one</div>
+    <h2>Turn the grind into a <em>game</em>.</h2>
+    <div class="link-pills">
+      <a class="link-pill" href="https://github.com/techykamatis/pokemon-agents" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49l-.01-1.9c-2.78.62-3.37-1.2-3.37-1.2-.46-1.18-1.11-1.5-1.11-1.5-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.9 1.56 2.35 1.11 2.92.85.09-.66.35-1.11.63-1.37-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05a9.36 9.36 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.81-4.57 5.06.36.31.68.94.68 1.9l-.01 2.81c0 .27.18.6.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg>GitHub repo</a>
+      <a class="link-pill" href="https://vhenjoseph.com" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>Built by Vhen Joseph</a>
+    </div>
+    <p class="disclaimer">A non-commercial fan project inspired by the Pokémon games. Not affiliated with or endorsed by Nintendo, Game Freak, Creatures or The Pokémon Company. All game artwork shown is rendered on your own machine and is not redistributed here.</p>
+    <div class="colophon">
+      <span>pokemonagents.dev</span>
+      <span>Open source · MIT</span>
+      <span>Made with Candice</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
