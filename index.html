@@ -4,19 +4,19 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Pokémon Agents — your coding agents, as Pokémon</title>
-<meta name="description" content="Pokémon Agents turns each Claude Code session into a Pokémon in a top-down town. Ditch the wall of logs — see who's working, who's done, and who needs you at a glance. Open source." />
+<meta name="description" content="See your AI coding agents as Pokémon living in a little pixel-art town. Each project gets its own Pokémon — watch what your agents are doing, see when they need help, and track progress as you work. Free and open source, runs on your Mac." />
 <meta name="theme-color" content="#E9F1FB" />
 <link rel="canonical" href="https://pokemonagents.dev" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://pokemonagents.dev" />
 <meta property="og:title" content="Pokémon Agents — your coding agents, as Pokémon" />
-<meta property="og:description" content="Ditch the wall of logs. Watch your Claude Code agents level up and evolve in real time. Catch badges along the way. Open source." />
+<meta property="og:description" content="See your AI coding agents as Pokémon living in a little pixel-art town. Each project gets its own Pokémon. Free and open source, runs on your Mac." />
 <meta property="og:image" content="https://pokemonagents.dev/assets/og-pokemon-agents.png" />
 <meta property="og:image:width" content="1600" />
 <meta property="og:image:height" content="900" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Pokémon Agents — your coding agents, as Pokémon" />
-<meta name="twitter:description" content="Ditch the wall of logs. Watch your Claude Code agents level up and evolve in real time. Catch badges along the way." />
+<meta name="twitter:description" content="See your AI coding agents as Pokémon living in a little pixel-art town. Free and open source, runs on your Mac." />
 <meta name="twitter:image" content="https://pokemonagents.dev/assets/og-pokemon-agents.png" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2317284A'/%3E%3Ccircle cx='16' cy='16' r='7' fill='none' stroke='%23F2B417' stroke-width='2.5'/%3E%3Cline x1='9' y1='16' x2='23' y2='16' stroke='%23F2B417' stroke-width='2.5'/%3E%3Ccircle cx='16' cy='16' r='2.4' fill='%23E9F1FB'/%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -63,26 +63,23 @@
   .mast-link:hover { color:var(--ink); }
   .mast-link:hover::after { transform:scaleX(1); }
 
-  /* eyebrow */
-  .eyebrow { font-family:var(--font-mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3); line-height:1; }
-  .eyebrow-row { display:inline-flex; align-items:center; gap:10px; }
-  .eyebrow-row .rule { width:46px; height:1px; background:var(--line); }
-
   /* buttons */
   .btn { display:inline-flex; align-items:center; gap:10px; padding:13px 22px; font-family:var(--font-sans); font-size:15px; font-weight:600; line-height:1; white-space:nowrap; border-radius:var(--radius-pill); cursor:pointer; border:1px solid var(--ink); transition:transform .4s var(--ease), background .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease), box-shadow .4s var(--ease); }
   .btn-primary { background:var(--ink); color:var(--ground); border-color:var(--ink); }
   .btn-ghost { background:transparent; color:var(--ink); border-color:var(--line); }
+  .btn-invert { background:var(--ground); color:var(--ink); border-color:var(--ground); }
   .btn:hover { transform:translateY(-3px); box-shadow:var(--shadow-cta); }
   .btn-ghost:hover { background:var(--ink); color:var(--ground); border-color:var(--ink); }
+  .btn-invert:hover { background:#fff; border-color:#fff; }
   .btn svg { display:block; }
 
   /* hero */
   .hero-grid { display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,1fr); gap:clamp(28px,5vw,66px); align-items:center; padding:clamp(44px,8vh,92px) 0 clamp(30px,5vw,56px); }
-  .hero h1 { font-family:var(--font-pixel); font-weight:400; color:var(--ink); font-size:clamp(26px,3.6vw,44px); line-height:1.5; letter-spacing:0; margin:22px 0 0; }
+  .hero h1 { font-family:var(--font-pixel); font-weight:400; color:var(--ink); font-size:clamp(26px,3.6vw,44px); line-height:1.5; letter-spacing:0; margin:0; }
   .hero h1 em { font-style:normal; color:var(--accent); }
-  .hero-lead { margin-top:clamp(22px,3vw,30px); max-width:40ch; font-size:var(--text-lead); line-height:1.5; color:var(--ink-2); }
-  .hero-lead b { color:var(--ink); font-weight:700; }
+  .hero-lead { margin-top:clamp(22px,3vw,30px); max-width:46ch; font-size:var(--text-lead); line-height:1.5; color:var(--ink-2); }
   .hero-cta { display:flex; flex-wrap:wrap; gap:12px; margin-top:clamp(26px,3vw,34px); }
+  .hero-meta { margin-top:18px; font-family:var(--font-mono); font-size:13px; letter-spacing:.02em; color:var(--ink-3); }
   .hero-media { display:flex; justify-content:center; align-items:center; }
 
   /* a handheld-style frame echoing the social cards */
@@ -93,52 +90,64 @@
   .device-screen { border-radius:clamp(12px,2.8vw,22px); overflow:hidden; background:#000; line-height:0; }
   .device-screen img { width:100%; height:auto; display:block; image-rendering:pixelated; }
 
-  /* strip under hero */
-  .strip { border-top:1px solid var(--line-2); border-bottom:1px solid var(--line-2); background:color-mix(in srgb, var(--wash) 60%, transparent); }
-  .strip-in { max-width:var(--content-max); margin:0 auto; padding:16px var(--gutter); display:flex; flex-wrap:wrap; align-items:center; gap:clamp(14px,4vw,40px); }
-  .strip .label { font-family:var(--font-mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3); }
-  .strip .items { display:flex; flex-wrap:wrap; gap:clamp(14px,3vw,32px); font-size:15px; font-weight:500; color:var(--ink-2); }
-  .strip .items span { display:inline-flex; align-items:center; gap:8px; }
-  .strip .items .d { width:5px; height:5px; border-radius:50%; background:var(--accent); flex:none; }
-
   /* section heads */
-  .sec-head { max-width:60ch; margin-bottom:clamp(34px,5vw,54px); }
-  .sec-head h2 { font-family:var(--font-pixel); font-weight:400; font-size:clamp(20px,2.7vw,30px); line-height:1.45; letter-spacing:0; color:var(--ink); margin:14px 0 0; }
-  .sec-head .support { font-size:var(--text-body); color:var(--ink-2); line-height:1.6; margin-top:18px; max-width:56ch; }
+  .sec-head { max-width:62ch; margin-bottom:clamp(34px,5vw,54px); }
+  .sec-head.center { margin-left:auto; margin-right:auto; text-align:center; }
+  .sec-head h2 { font-family:var(--font-pixel); font-weight:400; font-size:clamp(20px,2.7vw,30px); line-height:1.45; letter-spacing:0; color:var(--ink); margin:0; }
+  .sec-head .support { font-size:var(--text-body); color:var(--ink-2); line-height:1.6; margin-top:20px; max-width:58ch; }
+  .sec-head.center .support { margin-left:auto; margin-right:auto; }
+  .sec-head .support + .support { margin-top:1em; }
   .sec-head .support b { color:var(--ink); font-weight:700; }
 
-  /* feature cards */
-  .features { display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(16px,2.4vw,26px); }
-  .feat { background:var(--surface); border:1px solid var(--line-2); border-radius:var(--radius-card); padding:clamp(24px,2.6vw,32px); box-shadow:0 18px 40px -30px rgba(23,40,74,.35); }
-  .feat h3 { font-family:var(--font-sans); font-weight:700; font-size:clamp(18px,1.7vw,21px); color:var(--ink); margin:0 0 10px; letter-spacing:-.01em; line-height:1.2; }
-  .feat p { font-size:16px; line-height:1.56; color:var(--ink-2); }
+  /* feature cards (2 x 2) */
+  .features { display:grid; grid-template-columns:repeat(2,1fr); gap:clamp(16px,2.4vw,26px); }
+  .feat { background:var(--surface); border:1px solid var(--line-2); border-radius:var(--radius-card); padding:clamp(26px,2.8vw,34px); box-shadow:0 18px 40px -30px rgba(23,40,74,.35); }
+  .feat h3 { font-family:var(--font-sans); font-weight:700; font-size:clamp(19px,1.8vw,22px); color:var(--ink); margin:0 0 12px; letter-spacing:-.01em; line-height:1.2; }
+  .feat p { font-size:16px; line-height:1.58; color:var(--ink-2); }
+  .feat p + p { margin-top:12px; }
 
-  /* run it */
+  /* progression band */
+  .band { background:var(--wash); }
+  .prog-list { list-style:none; display:grid; gap:14px; max-width:60ch; margin:4px 0 24px; }
+  .prog-list li { position:relative; padding-left:26px; font-size:var(--text-body); line-height:1.5; color:var(--ink-2); }
+  .prog-list li::before { content:""; position:absolute; left:2px; top:.52em; width:8px; height:8px; background:var(--gold); }
+  .prog-list li b { color:var(--ink); font-weight:700; }
+  .prog-close { font-size:var(--text-body); color:var(--ink-2); max-width:58ch; }
+
+  /* getting started — dark card with numbered steps */
   .run { background:var(--contrast-bg); color:var(--contrast-ink); border-radius:clamp(18px,2.6vw,26px); padding:clamp(30px,4vw,54px); }
-  .run .eyebrow { color:var(--contrast-muted); }
-  .run h2 { font-family:var(--font-pixel); font-weight:400; font-size:clamp(18px,2.4vw,26px); line-height:1.5; color:var(--contrast-ink); margin:14px 0 8px; }
-  .run p { color:var(--contrast-body); font-size:16px; max-width:58ch; margin-bottom:26px; }
+  .run h2 { font-family:var(--font-pixel); font-weight:400; font-size:clamp(18px,2.4vw,26px); line-height:1.5; color:var(--contrast-ink); margin:0 0 16px; }
+  .run p { color:var(--contrast-body); font-size:16px; max-width:60ch; }
   .run p a { color:var(--contrast-ink); text-decoration:underline; text-underline-offset:3px; text-decoration-color:var(--contrast-muted); }
-  .code { font-family:var(--font-mono); font-size:clamp(13px,1.4vw,15px); line-height:2; background:rgba(0,0,0,.28); border:1px solid var(--contrast-line); border-radius:12px; padding:20px 22px; color:var(--contrast-ink); overflow-x:auto; }
-  .code .c { color:var(--contrast-muted); }
-  .code .g { color:var(--gold); }
-  .run-meta { margin-top:20px; font-size:13px; color:var(--contrast-muted); font-family:var(--font-mono); letter-spacing:.02em; }
+  .steps { display:grid; gap:18px; margin:26px 0 24px; }
+  .step-label { font-family:var(--font-sans); font-weight:600; font-size:15px; color:var(--contrast-ink); margin-bottom:10px; display:flex; align-items:center; gap:11px; }
+  .step-n { font-family:var(--font-pixel); font-size:12px; color:var(--gold); }
+  .code { font-family:var(--font-mono); font-size:clamp(13px,1.4vw,15px); line-height:1.7; background:rgba(0,0,0,.28); border:1px solid var(--contrast-line); border-radius:12px; padding:14px 18px; color:var(--contrast-ink); overflow-x:auto; }
+  .run .open-line { margin-top:4px; }
+  .run .open-line .g { color:var(--gold); font-family:var(--font-mono); }
+  .run-meta { margin-top:22px; font-size:13px; color:var(--contrast-muted); font-family:var(--font-mono); letter-spacing:.02em; }
 
-  /* footer */
-  .footer { background:var(--contrast-bg); color:var(--contrast-ink); margin-top:clamp(40px,6vw,80px); }
-  .footer-in { max-width:var(--content-max); margin:0 auto; padding:clamp(56px,9vw,100px) var(--gutter) clamp(44px,7vw,72px); }
-  .footer .kick { font-family:var(--font-mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--contrast-muted); margin-bottom:14px; }
-  .footer h2 { font-family:var(--font-pixel); font-weight:400; color:var(--contrast-ink); font-size:clamp(20px,3vw,32px); line-height:1.5; max-width:20ch; margin:0 0 26px; }
-  .footer h2 em { font-style:normal; color:var(--gold); }
-  .link-pills { display:flex; flex-wrap:wrap; gap:12px; margin-bottom:40px; }
+  /* prose (privacy) */
+  .prose p { font-size:var(--text-body); color:var(--ink-2); line-height:1.62; max-width:60ch; margin-bottom:1em; }
+  .prose a.u { text-decoration:underline; text-underline-offset:3px; text-decoration-color:var(--ink-3); font-weight:600; }
+
+  /* final CTA + footer (one dark region) */
+  .final { background:var(--contrast-bg); color:var(--contrast-ink); text-align:center; padding:clamp(64px,10vw,120px) var(--gutter) clamp(44px,6vw,64px); }
+  .final h2 { font-family:var(--font-pixel); font-weight:400; color:var(--contrast-ink); font-size:clamp(20px,3vw,32px); line-height:1.5; max-width:22ch; margin:0 auto; }
+  .final h2 em { font-style:normal; color:var(--gold); }
+  .final p { color:var(--contrast-body); font-size:var(--text-body); line-height:1.55; max-width:52ch; margin:22px auto 32px; }
+  .footer { background:var(--contrast-bg); color:var(--contrast-ink); }
+  .footer-in { max-width:var(--content-max); margin:0 auto; padding:0 var(--gutter) clamp(50px,7vw,80px); }
+  .link-pills { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin-bottom:44px; }
   .link-pill { display:inline-flex; align-items:center; gap:9px; font-family:var(--font-sans); font-size:16px; font-weight:500; padding:12px 20px; border-radius:var(--radius-pill); border:1px solid var(--contrast-line); color:var(--contrast-ink); transition:background .2s var(--ease), color .2s var(--ease); }
   .link-pill svg { color:var(--contrast-muted); transition:color .2s var(--ease); }
   .link-pill:hover { background:var(--contrast-ink); color:var(--contrast-bg); }
   .link-pill:hover svg { color:var(--contrast-bg); }
-  .disclaimer { font-size:13px; line-height:1.5; color:var(--contrast-muted); max-width:62ch; padding-top:26px; border-top:1px solid var(--contrast-line); }
-  .colophon { margin-top:16px; display:flex; flex-wrap:wrap; gap:6px 26px; font-family:var(--font-mono); font-size:12px; color:var(--contrast-muted); }
+  .foot-made { font-weight:600; color:var(--contrast-ink); margin-bottom:16px; }
+  .disclaimer { font-size:13px; line-height:1.55; color:var(--contrast-muted); max-width:64ch; margin:0 auto 10px; }
+  .colophon { margin-top:18px; font-family:var(--font-mono); font-size:12px; color:var(--contrast-muted); letter-spacing:.04em; }
 
-  @media (max-width:860px) { .features { grid-template-columns:1fr; } }
+  @media (max-width:820px) { .features { grid-template-columns:1fr; } }
   @media (max-width:768px) {
     .hero-grid { grid-template-columns:1fr; }
     .hero-grid .hero-media { order:-1; }
@@ -156,98 +165,157 @@
       <span>Pokémon Agents</span>
     </a>
     <nav class="nav">
-      <a href="#how" class="mast-link">how it works</a>
-      <a href="#run" class="mast-link">run it</a>
+      <a href="#features" class="mast-link">features</a>
+      <a href="#start" class="mast-link">get started</a>
       <a class="btn btn-primary" href="https://github.com/techykamatis/pokemon-agents" target="_blank" rel="noopener" style="padding:9px 16px;font-size:14px">GitHub</a>
     </nav>
   </div>
 </header>
 
 <main id="top">
-  <!-- HERO -->
+  <!-- 1. HERO -->
   <div class="wrap">
     <section class="hero hero-grid">
       <div>
         <h1>Your coding agents,<br>as <em>Pokémon</em>.</h1>
-        <p class="hero-lead"><b>Ditch the wall of logs.</b> Watch your agents level up and evolve in real time. Catch badges along the way.</p>
+        <p class="hero-lead">See your AI coding agents as Pokémon living in a little pixel-art town. Each project gets its own Pokémon. Watch what your agents are doing, see when they need your help, and check their progress as you work.</p>
         <div class="hero-cta">
-          <a class="btn btn-primary" href="https://github.com/techykamatis/pokemon-agents" target="_blank" rel="noopener">
+          <a class="btn btn-primary" href="#start">Get started</a>
+          <a class="btn btn-ghost" href="https://github.com/techykamatis/pokemon-agents" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49l-.01-1.9c-2.78.62-3.37-1.2-3.37-1.2-.46-1.18-1.11-1.5-1.11-1.5-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.9 1.56 2.35 1.11 2.92.85.09-.66.35-1.11.63-1.37-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05a9.36 9.36 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.81-4.57 5.06.36.31.68.94.68 1.9l-.01 2.81c0 .27.18.6.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg>
             <span>View on GitHub</span>
           </a>
-          <a class="btn btn-ghost" href="#how">See how it works</a>
         </div>
+        <p class="hero-meta">Free and open source · Runs on your Mac</p>
       </div>
       <div class="hero-media">
         <div class="device">
           <div class="device-cam"></div>
           <div class="device-screen">
-            <img src="assets/pokemon-agents-demo.gif" width="640" height="576" alt="Pokémon Agents demo: Claude Code sessions as creatures around a top-down town, levelling up and evolving as the work lands, with one walking up to ask a question." />
+            <img src="assets/pokemon-agents-demo.gif" width="640" height="576" alt="Pokémon Agents demo: coding sessions as creatures around a top-down town, levelling up and evolving as the work lands, with one walking up to ask a question." />
           </div>
         </div>
       </div>
     </section>
   </div>
 
-  <!-- STRIP -->
-  <div class="strip">
-    <div class="strip-in">
-      <span class="label">Supported environments</span>
-      <div class="items"><span><span class="d"></span>Claude Code (terminal)</span><span><span class="d"></span>Claude Desktop App</span><span><span class="d"></span>macOS (Node 22)</span></div>
-    </div>
-  </div>
-
-  <!-- HOW IT WORKS -->
+  <!-- 2. INTRODUCTION -->
   <div class="wrap">
-    <section id="how" class="sec">
+    <section id="intro" class="sec">
       <div class="sec-head">
         <h2>One town. One Pokémon per project.</h2>
-        <p class="support">When you run multiple Claude Code sessions at once, tracking which window needs attention takes time. Pokémon Agents maps each session to a character in a top-down town so you can check session states visually.</p>
+        <p class="support">Working with several coding agents can get confusing. You have to switch between terminals just to see what's happening.</p>
+        <p class="support">Pokémon Agents gives each project a Pokémon and a place in the town. You can look around to see which agents are working, which have finished, and which are waiting for your reply.</p>
+        <p class="support">It's a different way to keep track of your coding sessions.</p>
       </div>
+    </section>
+  </div>
+
+  <!-- 3. FEATURES -->
+  <div class="wrap">
+    <section id="features" class="sec" style="padding-top:0">
       <div class="features">
         <div class="feat">
-          <h3>See status at a glance</h3>
-          <p>Spot who is running, who finished, and who needs input. A session waiting on a decision walks up with an exclamation mark above its head.</p>
+          <h3>See when an agent needs your help</h3>
+          <p>When an agent asks a question or waits for your approval, its Pokémon comes to find you. You'll see an exclamation mark above its head, just like in the Pokémon games.</p>
+          <p>You can check what's happening without opening every terminal.</p>
         </div>
         <div class="feat">
-          <h3>Tie growth to actual code</h3>
-          <p>Each project links to a persistent Pokémon. It gains levels, earns badges, and evolves through the Gen 1 and Gen 2 trees based on your git commits, pull requests, and passing test runs.</p>
+          <h3>Your Pokémon grows as you code</h3>
+          <p>Your Pokémon gains experience as you work on your projects. Commits, test results, and other coding activity contribute to its progress.</p>
+          <p>As it grows, it can level up, earn badges, and evolve.</p>
         </div>
         <div class="feat">
-          <h3>Respond directly from the game</h3>
-          <p>Reply to waiting agents, jump to active terminals, start new tasks, and review activity logs without leaving the town view.</p>
+          <h3>Your projects become a little town</h3>
+          <p>The town gives your coding sessions a place to live. Different locations represent different kinds of work.</p>
+          <p>Walk around, find your Pokémon, and check what your agents are doing. You can see the state of your projects without reading through a long list of logs.</p>
+        </div>
+        <div class="feat">
+          <h3>Work with your agents from the game</h3>
+          <p>When an agent needs an answer, you can respond from the game. You can also open its terminal to see more details.</p>
+          <p>Start new tasks and check your recent activity without leaving the town every time.</p>
         </div>
       </div>
     </section>
   </div>
 
-  <!-- RUN IT -->
+  <!-- 4. PROGRESSION -->
+  <div class="band">
+    <div class="wrap">
+      <section class="sec">
+        <div class="sec-head">
+          <h2>Your work helps your Pokémon grow</h2>
+          <p class="support">As you work on your projects, your Pokémon makes progress too.</p>
+        </div>
+        <ul class="prog-list">
+          <li><b>Gain experience</b> as your coding sessions progress.</li>
+          <li><b>Earn badges</b> for completing different milestones.</li>
+          <li><b>Evolve your Pokémon</b> as it meets the requirements.</li>
+          <li><b>Find shiny Pokémon</b> and see which Pokémon your projects get.</li>
+        </ul>
+        <p class="prog-close">Your Pokémon's progress is connected to your coding activity.</p>
+      </section>
+    </div>
+  </div>
+
+  <!-- 5. GETTING STARTED -->
   <div class="wrap">
-    <section id="run" class="sec" style="padding-top:0">
+    <section id="start" class="sec">
       <div class="run">
-        <span class="eyebrow-row"><span class="eyebrow">Run it · about two minutes</span></span>
-        <h2>Free, open source, yours.</h2>
-        <p>You'll need macOS, Node 22 and Claude Code. Clone the repo and run three commands — the first start reads your Claude history once, then just follows what's new. Everything stays on your machine. <a href="https://github.com/techykamatis/pokemon-agents" target="_blank" rel="noopener">Full guide on GitHub →</a></p>
-        <div class="code"><span class="c"># clone, then:</span><br>npm install<br>npm run setup   <span class="c"># git hooks + fetch the assets</span><br>npm start       <span class="c"># open </span><span class="g">http://127.0.0.1:7880</span></div>
-        <div class="run-meta">MIT licensed · no account, no cloud, no telemetry</div>
+        <h2>Get your Pokémon town running</h2>
+        <p>Pokémon Agents is free and open source, and runs locally on your Mac. You'll need macOS, Node.js 22, and Claude Code.</p>
+        <div class="steps">
+          <div>
+            <div class="step-label"><span class="step-n">1</span> Install the dependencies</div>
+            <div class="code">npm install</div>
+          </div>
+          <div>
+            <div class="step-label"><span class="step-n">2</span> Set up the project</div>
+            <div class="code">npm run setup</div>
+          </div>
+          <div>
+            <div class="step-label"><span class="step-n">3</span> Start Pokémon Agents</div>
+            <div class="code">npm start</div>
+          </div>
+        </div>
+        <p class="open-line">Open <span class="g">http://127.0.0.1:7880</span> in your browser to see your town. <a href="https://github.com/techykamatis/pokemon-agents" target="_blank" rel="noopener">View the full setup guide on GitHub →</a></p>
+        <div class="run-meta">MIT licensed · runs locally · no account, no cloud, no telemetry</div>
+      </div>
+    </section>
+  </div>
+
+  <!-- 6. PRIVACY & OPEN SOURCE -->
+  <div class="wrap">
+    <section id="privacy" class="sec" style="padding-top:0">
+      <div class="sec-head">
+        <h2>Runs on your Mac</h2>
+      </div>
+      <div class="prose">
+        <p>Pokémon Agents runs on your own machine and opens in your browser. It reads your Claude sessions to show what your agents are doing.</p>
+        <p>Your session data and game progress are stored locally. The app does not send telemetry.</p>
+        <p>The source code is available on GitHub under the MIT License. You can read it, change it, and contribute to the project. <a class="u" href="https://github.com/techykamatis/pokemon-agents" target="_blank" rel="noopener">View the source code</a>.</p>
       </div>
     </section>
   </div>
 </main>
 
+<!-- 7. FINAL CTA -->
+<section class="final">
+  <h2>Give your coding agents a <em>home</em>.</h2>
+  <p>See your coding sessions as Pokémon, keep track of their progress, and find out when they need your help. Set up your town and see your projects in a new way.</p>
+  <a class="btn btn-invert" href="https://github.com/techykamatis/pokemon-agents" target="_blank" rel="noopener">Get started on GitHub</a>
+</section>
+
+<!-- 8. FOOTER -->
 <footer class="footer">
   <div class="footer-in">
-    <h2>Turn the grind into a <em>game</em>.</h2>
     <div class="link-pills">
-      <a class="link-pill" href="https://github.com/techykamatis/pokemon-agents" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49l-.01-1.9c-2.78.62-3.37-1.2-3.37-1.2-.46-1.18-1.11-1.5-1.11-1.5-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.9 1.56 2.35 1.11 2.92.85.09-.66.35-1.11.63-1.37-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05a9.36 9.36 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.81-4.57 5.06.36.31.68.94.68 1.9l-.01 2.81c0 .27.18.6.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg>GitHub repo</a>
-      <a class="link-pill" href="https://vhenjoseph.com" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>Built by Vhen Joseph</a>
+      <a class="link-pill" href="https://github.com/techykamatis/pokemon-agents" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49l-.01-1.9c-2.78.62-3.37-1.2-3.37-1.2-.46-1.18-1.11-1.5-1.11-1.5-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.9 1.56 2.35 1.11 2.92.85.09-.66.35-1.11.63-1.37-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05a9.36 9.36 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.81-4.57 5.06.36.31.68.94.68 1.9l-.01 2.81c0 .27.18.6.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg>GitHub</a>
+      <a class="link-pill" href="https://vhenjoseph.com" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>Vhen Joseph</a>
     </div>
-    <p class="disclaimer">A non-commercial fan project inspired by the Pokémon games. Not affiliated with or endorsed by Nintendo, Game Freak, Creatures or The Pokémon Company. All game artwork shown is rendered on your own machine and is not redistributed here.</p>
-    <div class="colophon">
-      <span>pokemonagents.dev</span>
-      <span>Open source · MIT</span>
-      <span>Made with Candice</span>
-    </div>
+    <p class="foot-made">Made by Vhen Joseph.</p>
+    <p class="disclaimer">Pokémon Agents is an independent fan project. It is not affiliated with or endorsed by Nintendo, Game Freak, Creatures Inc., or The Pokémon Company. Pokémon and related characters and assets belong to their respective owners. See the GitHub repository for licensing details.</p>
+    <div class="colophon">pokemonagents.dev · Open source · MIT License</div>
   </div>
 </footer>
 
