@@ -43,8 +43,7 @@
   }
   * { margin:0; padding:0; box-sizing:border-box; }
   html { scroll-behavior:smooth; }
-  body { background:var(--ground); color:var(--ink-2); font-family:var(--font-sans); font-size:18px; line-height:1.65; -webkit-font-smoothing:antialiased; overflow-x:hidden;
-    background-image:radial-gradient(var(--sky) 1px, transparent 1.4px); background-size:22px 22px; background-attachment:fixed; }
+  body { background:var(--ground); color:var(--ink-2); font-family:var(--font-sans); font-size:18px; line-height:1.65; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
   ::selection { background:var(--ink); color:var(--ground); }
   a { color:var(--ink); text-decoration:none; }
   img { max-width:100%; display:block; }
@@ -67,10 +66,7 @@
   /* eyebrow */
   .eyebrow { font-family:var(--font-mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3); line-height:1; }
   .eyebrow-row { display:inline-flex; align-items:center; gap:10px; }
-  .eyebrow-row .live { width:8px; height:8px; border-radius:50%; background:var(--gold); position:relative; flex:none; }
-  .eyebrow-row .live::after { content:""; position:absolute; inset:0; border-radius:50%; background:var(--gold); animation:pulse 2.4s var(--ease) infinite; }
   .eyebrow-row .rule { width:46px; height:1px; background:var(--line); }
-  @keyframes pulse { 0%{transform:scale(1);opacity:.55} 70%,100%{transform:scale(2.7);opacity:0} }
 
   /* buttons */
   .btn { display:inline-flex; align-items:center; gap:10px; padding:13px 22px; font-family:var(--font-sans); font-size:15px; font-weight:600; line-height:1; white-space:nowrap; border-radius:var(--radius-pill); cursor:pointer; border:1px solid var(--ink); transition:transform .4s var(--ease), background .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease), box-shadow .4s var(--ease); }
@@ -118,7 +114,7 @@
   .feat p { font-size:16px; line-height:1.56; color:var(--ink-2); }
 
   /* run it */
-  .run { background:var(--contrast-bg); color:var(--contrast-ink); border-radius:clamp(18px,2.6vw,26px); padding:clamp(30px,4vw,54px); background-image:radial-gradient(rgba(191,217,242,.09) 1px, transparent 1.4px); background-size:22px 22px; }
+  .run { background:var(--contrast-bg); color:var(--contrast-ink); border-radius:clamp(18px,2.6vw,26px); padding:clamp(30px,4vw,54px); }
   .run .eyebrow { color:var(--contrast-muted); }
   .run h2 { font-family:var(--font-pixel); font-weight:400; font-size:clamp(18px,2.4vw,26px); line-height:1.5; color:var(--contrast-ink); margin:14px 0 8px; }
   .run p { color:var(--contrast-body); font-size:16px; max-width:58ch; margin-bottom:26px; }
@@ -148,7 +144,7 @@
     .hero-grid .hero-media { order:-1; }
     .nav .mast-link { display:none; }
   }
-  @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } .eyebrow-row .live::after { animation:none; } }
+  @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } }
 </style>
 </head>
 <body>
