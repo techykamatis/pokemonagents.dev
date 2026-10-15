@@ -114,8 +114,7 @@
   /* feature cards */
   .features { display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(16px,2.4vw,26px); }
   .feat { background:var(--surface); border:1px solid var(--line-2); border-radius:var(--radius-card); padding:clamp(24px,2.6vw,32px); box-shadow:0 18px 40px -30px rgba(23,40,74,.35); }
-  .feat .fnum { font-family:var(--font-pixel); font-size:13px; color:var(--gold); }
-  .feat h3 { font-family:var(--font-sans); font-weight:700; font-size:clamp(18px,1.7vw,21px); color:var(--ink); margin:16px 0 10px; letter-spacing:-.01em; line-height:1.2; }
+  .feat h3 { font-family:var(--font-sans); font-weight:700; font-size:clamp(18px,1.7vw,21px); color:var(--ink); margin:0 0 10px; letter-spacing:-.01em; line-height:1.2; }
   .feat p { font-size:16px; line-height:1.56; color:var(--ink-2); }
 
   /* run it */
@@ -173,9 +172,8 @@
   <div class="wrap">
     <section class="hero hero-grid">
       <div>
-        <span class="eyebrow-row"><span class="live"></span><span class="eyebrow">Open source · for Claude Code</span><span class="rule"></span></span>
         <h1>Your coding agents,<br>as <em>Pokémon</em>.</h1>
-        <p class="hero-lead"><b>Ditch the wall of logs.</b> Watch your agents level up and evolve in real time. Catch badges along the way!</p>
+        <p class="hero-lead"><b>Ditch the wall of logs.</b> Watch your agents level up and evolve in real time. Catch badges along the way.</p>
         <div class="hero-cta">
           <a class="btn btn-primary" href="https://github.com/techykamatis/pokemon-agents" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49l-.01-1.9c-2.78.62-3.37-1.2-3.37-1.2-.46-1.18-1.11-1.5-1.11-1.5-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.9 1.56 2.35 1.11 2.92.85.09-.66.35-1.11.63-1.37-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05a9.36 9.36 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.81-4.57 5.06.36.31.68.94.68 1.9l-.01 2.81c0 .27.18.6.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg>
@@ -198,8 +196,8 @@
   <!-- STRIP -->
   <div class="strip">
     <div class="strip-in">
-      <span class="label">What it runs on</span>
-      <div class="items"><span><span class="d"></span>Claude Code (terminal)</span><span><span class="d"></span>Claude desktop app</span><span><span class="d"></span>macOS · Node 22</span></div>
+      <span class="label">Supported environments</span>
+      <div class="items"><span><span class="d"></span>Claude Code (terminal)</span><span><span class="d"></span>Claude Desktop App</span><span><span class="d"></span>macOS (Node 22)</span></div>
     </div>
   </div>
 
@@ -207,25 +205,21 @@
   <div class="wrap">
     <section id="how" class="sec">
       <div class="sec-head">
-        <span class="eyebrow-row"><span class="eyebrow">How it works</span></span>
         <h2>One town. One Pokémon per project.</h2>
-        <p class="support">When you've got a dozen Claude Code sessions open, the hard part is knowing which one needs you. Pokémon Agents turns each session into a Pokémon in a top-down town, so the state of your work is something you <b>glance at</b> instead of dig for.</p>
+        <p class="support">When you run multiple Claude Code sessions at once, tracking which window needs attention takes time. Pokémon Agents maps each session to a character in a top-down town so you can check session states visually.</p>
       </div>
       <div class="features">
         <div class="feat">
-          <div class="fnum">01</div>
-          <h3>See it at a glance</h3>
-          <p>Who's working, who's finished, and who's stuck. The one waiting on a decision walks up to you with a "!" — no more scanning a wall of terminals.</p>
+          <h3>See status at a glance</h3>
+          <p>Spot who is running, who finished, and who needs input. A session waiting on a decision walks up with an exclamation mark above its head.</p>
         </div>
         <div class="feat">
-          <div class="fnum">02</div>
-          <h3>It grows on real work</h3>
-          <p>Each project is one Pokémon, kept for good. It levels up, earns badges and evolves through the real Gen 1 &amp; 2 tree — driven by your actual commits, merges and green test runs.</p>
+          <h3>Tie growth to actual code</h3>
+          <p>Each project links to a persistent Pokémon. It gains levels, earns badges, and evolves through the Gen 1 and Gen 2 trees based on your git commits, pull requests, and passing test runs.</p>
         </div>
         <div class="feat">
-          <div class="fnum">03</div>
-          <h3>Answer without leaving</h3>
-          <p>From inside the game, reply to a waiting session, jump to its terminal, start an agent on a goal, and look back at everything that happened while you were away.</p>
+          <h3>Respond directly from the game</h3>
+          <p>Reply to waiting agents, jump to active terminals, start new tasks, and review activity logs without leaving the town view.</p>
         </div>
       </div>
     </section>
@@ -247,7 +241,6 @@
 
 <footer class="footer">
   <div class="footer-in">
-    <div class="kick">Ready player one</div>
     <h2>Turn the grind into a <em>game</em>.</h2>
     <div class="link-pills">
       <a class="link-pill" href="https://github.com/techykamatis/pokemon-agents" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49l-.01-1.9c-2.78.62-3.37-1.2-3.37-1.2-.46-1.18-1.11-1.5-1.11-1.5-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.9 1.56 2.35 1.11 2.92.85.09-.66.35-1.11.63-1.37-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05a9.36 9.36 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.81-4.57 5.06.36.31.68.94.68 1.9l-.01 2.81c0 .27.18.6.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg>GitHub repo</a>
