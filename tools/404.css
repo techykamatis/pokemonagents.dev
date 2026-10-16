@@ -1,0 +1,48 @@
+<style>
+  /* Route 404. Everything above is the site's own stylesheet, so the masthead,
+     footer, type and colours are the real ones rather than a copy that drifts. */
+  .r404 { min-height:calc(100vh - 64px); display:grid; align-content:center; justify-items:center;
+    text-align:center; padding:clamp(40px,8vh,96px) var(--gutter) clamp(56px,9vh,110px); }
+  /* ROUTE stacked over 404, both in the pixel face -- Press Start 2P is already
+     pixel art, so size is all it needs. ROUTE is five characters against three,
+     and the face is monospaced, so 0.6x makes the two lines the same width. */
+  .r404-stack { --r404: clamp(72px,20vw,220px); display:grid; justify-items:center; gap:clamp(6px,1vw,14px); }
+  .r404-word, .r404-big { font-family:var(--font-pixel); font-weight:400; line-height:1;
+    color:var(--ink); letter-spacing:.02em; margin:0;
+    text-shadow:0 clamp(5px,.9vw,10px) 0 var(--sky); }
+  .r404-word { font-size:calc(var(--r404) * .6); }
+  .r404-big  { font-size:var(--r404); }
+  .r404-box { background:#fff; border:3px solid var(--ink); border-radius:4px; position:relative;
+    max-width:520px; width:100%; text-align:left; padding:clamp(18px,2.2vw,26px) clamp(20px,2.4vw,30px);
+    margin-top:clamp(34px,5vw,54px); }
+  .r404-box p { font-size:var(--text-body); line-height:1.6; color:var(--ink); }
+  .r404-box p + p { margin-top:.7em; }
+  .r404-more { position:absolute; right:14px; bottom:10px; color:var(--ink); font-size:13px; }
+  @keyframes r404-blink { 0%,50% { opacity:1 } 50.01%,100% { opacity:0 } }
+  .r404-cta { margin-top:clamp(26px,3.4vw,38px); display:flex; flex-wrap:wrap; gap:12px; justify-content:center; }
+  /* Entrance: each pixel character drops in with the same overshoot the callout
+     sprites use, left to right, ROUTE then 404. Characters are wrapped by script;
+     without it the words simply sit there, already readable. */
+  .r404-ch { display:inline-block; }
+  .js .r404-ch { opacity:0; }
+  .js .r404-ch.in { animation:r404-drop .44s cubic-bezier(.2,1.5,.4,1) both; }
+  @keyframes r404-drop {
+    0%   { opacity:0; transform:translateY(-26px) scale(.86); }
+    60%  { opacity:1; transform:translateY(3px)   scale(1.04); }
+    100% { opacity:1; transform:translateY(0)     scale(1); }
+  }
+  /* the box waits its turn, then types like the callouts do */
+  .js .r404-box { opacity:0; }
+  .js .r404-box.in { animation:r404-fade .5s ease both; }
+  @keyframes r404-fade { from { opacity:0; transform:translateY(10px) } to { opacity:1; transform:none } }
+  .r404-more { opacity:0; }
+  .r404-more.on { animation:r404-blink 1s steps(1,end) infinite; }
+  .js .r404-cta { opacity:0; }
+  .js .r404-cta.in { animation:r404-fade .5s ease both; }
+
+  @media (prefers-reduced-motion:reduce) {
+    .js .r404-ch, .js .r404-box, .js .r404-cta { opacity:1; }
+    .js .r404-ch.in, .js .r404-box.in, .js .r404-cta.in { animation:none; }
+    .r404-more, .r404-more.on { animation:none; opacity:1; }
+  }
+</style>
