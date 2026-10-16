@@ -27,7 +27,7 @@
     /* Pokémon Agents palette — a Pokémon Crystal / Violet City read: pale
        crystal-blue paper, deep navy ink, badge-gold spark. Same tokens the
        vhenjoseph.com feature card and the social assets use, so it's one brand. */
-    --ground:#E9F1FB; --surface:#FFFFFF; --wash:#DCE8F8;
+    --ground:#E9F1FB; --wash:#DCE8F8;
     --ink:#17284A; --ink-2:#3D507A; --ink-3:#7686A6;
     --accent:#2F6DB5; --sky:#BFD9F2; --gold:#F2B417; --screen:#0E1B33;
     --line:rgba(23,40,74,.14); --line-2:rgba(23,40,74,.08);
@@ -37,7 +37,7 @@
     --font-pixel:'Press Start 2P',ui-monospace,monospace;
     --text-h2:clamp(26px,4.2vw,44px); --text-lead:clamp(19px,2vw,25px); --text-body:clamp(17px,1.5vw,20px);
     --gutter:clamp(22px,5vw,64px); --section-y:clamp(56px,9vw,104px); --content-max:1120px;
-    --radius-pill:100px; --radius-card:18px;
+    --radius-pill:100px;
     --ease:cubic-bezier(.22,.61,.24,1);
     --shadow-cta:0 8px 18px -10px rgba(14,27,51,.22);
   }
@@ -100,11 +100,57 @@
   .sec-head .support b { color:var(--ink); font-weight:700; }
 
   /* feature cards (2 x 2) */
-  .features { display:grid; grid-template-columns:repeat(2,1fr); gap:clamp(16px,2.4vw,26px); }
-  .feat { background:var(--surface); border:1px solid var(--line-2); border-radius:var(--radius-card); padding:clamp(26px,2.8vw,34px); box-shadow:0 18px 40px -30px rgba(23,40,74,.35); }
+  .features { display:grid; grid-template-columns:repeat(2,1fr); gap:clamp(28px,4vw,56px); }
   .feat h3 { font-family:var(--font-sans); font-weight:700; font-size:clamp(19px,1.8vw,22px); color:var(--ink); margin:0 0 12px; letter-spacing:-.01em; line-height:1.2; }
   .feat p { font-size:16px; line-height:1.58; color:var(--ink-2); }
   .feat p + p { margin-top:12px; }
+
+  /* the callouts: the game's own emote sprites, rendered from gfx/emotes with the
+     same two-bit palette maths web/js/pixels.mjs uses, so they match what the
+     town actually draws above a Pokémon's head. */
+  .callouts { display:grid; grid-template-columns:repeat(2,1fr); gap:clamp(22px,2.6vw,34px) clamp(28px,4vw,56px); margin-top:clamp(32px,4vw,48px); }
+  .callout { display:grid; grid-template-columns:auto 1fr; gap:14px; align-items:start; }
+  .callout img { width:38px; height:38px; image-rendering:pixelated; margin-top:2px; }
+  .callout .cname { font-family:var(--font-pixel); font-size:11px; color:var(--accent); display:block; margin-bottom:8px; }
+  .callout .cwhy { font-size:15px; line-height:1.5; color:var(--ink-2); }
+  @media (max-width:820px) { .callouts { grid-template-columns:1fr; } }
+
+  /* Interactive callouts. The static .callouts grid above stays in the DOM and is
+     the no-JS fallback; script.js only swaps to this when it can run. */
+  .cs { position:relative; display:none; }
+  .cs.on { display:block; }
+  .cs-track { height:150vh; }
+  .cs-stage { position:sticky; top:24vh; }
+  .cs-lede { font-family:var(--font-sans); font-weight:700; font-size:clamp(17px,1.6vw,20px);
+    color:var(--ink); margin-bottom:clamp(18px,2.2vw,26px); }
+  .cs-row { display:grid; grid-template-columns:auto minmax(0,560px); justify-content:start;
+    gap:clamp(22px,3.4vw,46px); align-items:center; }
+  .cs-emote { width:clamp(84px,9vw,116px); height:clamp(84px,9vw,116px); display:grid; place-items:center; }
+  .cs-emote img { width:100%; height:100%; image-rendering:pixelated; }
+  .cs-emote.pop img { animation:cs-pop .42s cubic-bezier(.2,1.5,.4,1); }
+  @keyframes cs-pop { 0%{transform:translateY(0) scale(.82)} 45%{transform:translateY(-14px) scale(1.06)} 100%{transform:translateY(0) scale(1)} }
+  /* the in-game text frame: white field, hard black border, square corners */
+  .cs-box { background:#fff; max-width:560px; border:3px solid var(--ink); border-radius:4px;
+    padding:clamp(18px,2.2vw,26px) clamp(20px,2.4vw,30px); min-height:150px; position:relative;
+    box-shadow:0 0 0 3px #fff inset; }
+  .cs-name { font-family:var(--font-pixel); font-size:12px; color:var(--accent); display:block; margin-bottom:14px; }
+  .cs-text { font-size:clamp(16px,1.6vw,19px); line-height:1.6; color:var(--ink); min-height:3.2em; }
+  .cs-caret { display:inline-block; width:.5em; }
+  .cs-more { position:absolute; right:14px; bottom:10px; color:var(--ink); font-size:13px; opacity:0; }
+  .cs-more.on { animation:cs-blink 1s steps(1,end) infinite; }
+  @keyframes cs-blink { 0%,50%{opacity:1} 50.01%,100%{opacity:0} }
+  .cs-dots { display:flex; gap:8px; margin-top:18px; }
+  .cs-dot { width:7px; height:7px; background:var(--line); }
+  .cs-dot.on { background:var(--gold); }
+  @media (max-width:700px) {
+    .cs-track { height:140vh; }
+    .cs-stage { top:18vh; }
+    .cs-row { grid-template-columns:1fr; justify-items:start; gap:18px; }
+  }
+  @media (prefers-reduced-motion:reduce) {
+    .cs-emote.pop img { animation:none; }
+    .cs-more.on { animation:none; opacity:1; }
+  }
 
   /* progression band */
   .band { background:var(--wash); }
@@ -250,24 +296,50 @@
     <section id="features" class="sec" style="padding-top:0">
       <div class="features">
         <div class="feat">
-          <h3>See when an agent needs your help</h3>
-          <p>When an agent asks a question or waits for your approval, its Pokémon comes to find you. You'll see an exclamation mark above its head, just like in the Pokémon games.</p>
-          <p>You can check what's happening without opening every terminal.</p>
+          <h3>See when an agent needs you</h3>
+          <p>When an agent has a question, or needs you to say yes to something, its Pokémon comes and finds you.</p>
+          <p id="calloutIntro">A little sign pops up over its head, like in the Pokémon games. There are four. Here is what each one means.</p>
         </div>
         <div class="feat">
-          <h3>Your Pokémon grows as you code</h3>
-          <p>Your Pokémon gains experience as you work on your projects. Commits, test results, and other coding activity contribute to its progress.</p>
-          <p>As it grows, it can level up, earn badges, and evolve.</p>
+          <h3>Answer without leaving the game</h3>
+          <p>You can answer an agent right here in the game. If you want the detail, you can open its terminal too.</p>
+          <p>You can also start new work and see what you did recently, without leaving the town.</p>
         </div>
-        <div class="feat">
-          <h3>Your projects become a little town</h3>
-          <p>The town gives your coding sessions a place to live. Different locations represent different kinds of work.</p>
-          <p>Walk around, find your Pokémon, and check what your agents are doing. You can see the state of your projects without reading through a long list of logs.</p>
+      </div>
+      <div class="callouts">
+        <div class="callout">
+          <img src="assets/emote-shock.png" width="38" height="38" alt="" />
+          <div><span class="cname">Waiting</span><span class="cwhy">It asked you a question and has stopped. Nothing moves until you answer. This one blinks, so it is easy to spot.</span></div>
         </div>
-        <div class="feat">
-          <h3>Work with your agents from the game</h3>
-          <p>When an agent needs an answer, you can respond from the game. You can also open its terminal to see more details.</p>
-          <p>Start new tasks and check your recent activity without leaving the town every time.</p>
+        <div class="callout">
+          <img src="assets/emote-happy.png" width="38" height="38" alt="" />
+          <div><span class="cname">Done</span><span class="cwhy">It finished the job and left you a report. There is nothing to answer.</span></div>
+        </div>
+        <div class="callout">
+          <img src="assets/emote-bolt.png" width="38" height="38" alt="" />
+          <div><span class="cname">Working</span><span class="cwhy">Still working, with helper agents running too.</span></div>
+        </div>
+        <div class="callout">
+          <img src="assets/emote-sleep.png" width="38" height="38" alt="" />
+          <div><span class="cname">Resting</span><span class="cwhy">It has been quiet for a long time.</span></div>
+        </div>
+      </div>
+      <div class="cs" id="cs" aria-hidden="true">
+        <div class="cs-track">
+          <div class="cs-stage">
+            <p class="cs-lede">A little sign pops up over its head. Here is what each one means.</p>
+            <div class="cs-row">
+              <div class="cs-emote" id="csEmote"><img src="assets/emote-shock.png" width="116" height="116" alt="" /></div>
+              <div>
+                <div class="cs-box">
+                  <span class="cs-name" id="csName">Waiting</span>
+                  <p class="cs-text" id="csText"></p>
+                  <span class="cs-more" id="csMore">&#9660;</span>
+                </div>
+                <div class="cs-dots" id="csDots"></div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -279,7 +351,7 @@
       <section id="evolution" class="sec">
         <div class="sec-head">
           <h2>Evolution</h2>
-          <p class="support">Your Pokémon evolves by the same rules as the games. What changes is the trigger: your real coding work is what moves it along.</p>
+          <p class="support">Your Pokémon evolves by the same rules as the games. The difference is what sets it off: your real coding work.</p>
         </div>
         <div class="evo">
           <div class="evo-media">
@@ -292,11 +364,11 @@
             </div>
           </div>
           <div class="evo-ways">
-            <div class="evo-way"><span class="ew-name">Level</span><span class="ew-why">commits, merges, green test runs, sessions and tool calls all add experience</span></div>
-            <div class="evo-way"><span class="ew-name">Stone</span><span class="ew-why">earned from a gym badge, for the Pokémon that evolve by stone</span></div>
-            <div class="evo-way"><span class="ew-name">Friendship</span><span class="ew-why">active days, sessions and commits &mdash; day and night tell Espeon and Umbreon apart</span></div>
-            <div class="evo-way"><span class="ew-name">Trade</span><span class="ew-why">a session handing work to a subagent, holding an item where one is needed</span></div>
-            <p class="prog-close">Every Gen 1 and 2 evolution rule is in here, straight from Pok&eacute;API &mdash; right down to Tyrogue, who branches on your commits against your green tests.</p>
+            <div class="evo-way"><span class="ew-name">Level</span><span class="ew-why">commits, merges, passing tests and sessions all add experience</span></div>
+            <div class="evo-way"><span class="ew-name">Stone</span><span class="ew-why">a stone you won from a gym badge, for the ones that need one</span></div>
+            <div class="evo-way"><span class="ew-name">Friendship</span><span class="ew-why">the days you show up, and the work you do. Day or night decides Espeon or Umbreon.</span></div>
+            <div class="evo-way"><span class="ew-name">Trade</span><span class="ew-why">a session passing work to a helper agent, holding an item if one is needed</span></div>
+            <p class="prog-close">Every Gen 1 and 2 evolution rule is in here, taken from Pok&eacute;API. Even Tyrogue, who picks its path from your commits against your passing tests.</p>
           </div>
         </div>
       </section>
@@ -444,5 +516,88 @@
 })();
 </script>
 
+<script>
+/* Interactive callouts.
+   Progressive enhancement: the static .callouts grid is the markup of record and
+   the no-JS fallback. Only when this runs do we hide it and show the scroll stage.
+   The typing is the letter-by-letter reveal the games are known for; note the app's
+   own widgets.mjs TextBox paints a whole page at once and blinks a ▼ for "more",
+   so the ▼ here is taken from it and the typing is not. */
+(function () {
+  var stage = document.getElementById('cs');
+  var grid  = document.querySelector('.callouts');
+  if (!stage || !grid) return;
+
+  var items = [].slice.call(grid.querySelectorAll('.callout')).map(function (el) {
+    return {
+      src:  el.querySelector('img').getAttribute('src'),
+      name: el.querySelector('.cname').textContent.trim(),
+      why:  el.querySelector('.cwhy').textContent.replace(/\s+/g, ' ').trim()
+    };
+  });
+  if (items.length < 2) return;
+
+  grid.style.display = 'none';
+  var intro = document.getElementById('calloutIntro');   // same sentence as .cs-lede
+  if (intro) intro.style.display = 'none';
+  stage.classList.add('on');
+  stage.removeAttribute('aria-hidden');
+
+  var img = stage.querySelector('#csEmote img'), emote = document.getElementById('csEmote');
+  var nameEl = document.getElementById('csName'), textEl = document.getElementById('csText');
+  var more = document.getElementById('csMore'), dots = document.getElementById('csDots');
+  var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  items.forEach(function (_, i) {
+    var d = document.createElement('span');
+    d.className = 'cs-dot' + (i === 0 ? ' on' : '');
+    dots.appendChild(d);
+  });
+
+  var timer = null, shown = -1;
+  function show(i) {
+    if (i === shown) return;
+    shown = i;
+    var it = items[i];
+    img.src = it.src;
+    nameEl.textContent = it.name;
+    [].forEach.call(dots.children, function (d, n) { d.classList.toggle('on', n === i); });
+
+    emote.classList.remove('pop');
+    void emote.offsetWidth;               // restart the keyframe
+    emote.classList.add('pop');
+
+    clearInterval(timer);
+    more.classList.remove('on');
+    if (still) { textEl.textContent = it.why; more.classList.add('on'); return; }
+    textEl.textContent = '';
+    var n = 0;
+    timer = setInterval(function () {
+      textEl.textContent = it.why.slice(0, ++n);
+      if (n >= it.why.length) { clearInterval(timer); more.classList.add('on'); }
+    }, 16);
+  }
+
+  var track = stage.querySelector('.cs-track');
+  var queued = false;
+  function update() {
+    queued = false;
+    var r = track.getBoundingClientRect();
+    var span = r.height - window.innerHeight;
+    if (span <= 0) return show(0);
+    var p = (-r.top) / span;                      // 0 at the top of the track, 1 at the end
+    var i = Math.floor(p * items.length);
+    show(Math.max(0, Math.min(items.length - 1, i)));
+  }
+  function onScroll() {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(update);
+  }
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', onScroll);
+  update();
+})();
+</script>
 </body>
 </html>
