@@ -36,7 +36,7 @@
     --font-mono:'Space Mono',ui-monospace,'SF Mono',Menlo,monospace;
     --font-pixel:'Press Start 2P',ui-monospace,monospace;
     --text-h2:clamp(26px,4.2vw,44px); --text-lead:clamp(19px,2vw,25px); --text-body:clamp(17px,1.5vw,20px);
-    --gutter:clamp(22px,5vw,64px); --section-y:clamp(56px,9vw,104px); --content-max:1120px;
+    --gutter:clamp(22px,5vw,64px); --section-y:clamp(30px,4.6vw,54px); --content-max:1120px;
     --radius-pill:100px;
     --ease:cubic-bezier(.22,.61,.24,1);
     --shadow-cta:0 8px 18px -10px rgba(14,27,51,.22);
@@ -154,6 +154,7 @@
 
   /* progression band */
   .band { background:var(--wash); }
+  .band .sec { padding-top:calc(var(--section-y) * 1.5); padding-bottom:calc(var(--section-y) * 1.5); }
   .prog-list { list-style:none; display:grid; gap:14px; max-width:60ch; margin:4px 0 24px; }
   .prog-list li { position:relative; padding-left:26px; font-size:var(--text-body); line-height:1.5; color:var(--ink-2); }
   .prog-list li::before { content:""; position:absolute; left:2px; top:.52em; width:8px; height:8px; background:var(--gold); }
@@ -293,7 +294,7 @@
 
   <!-- 3. FEATURES -->
   <div class="wrap">
-    <section id="features" class="sec" style="padding-top:0">
+    <section id="features" class="sec">
       <div class="features">
         <div class="feat">
           <h3>See when an agent needs you</h3>
@@ -317,7 +318,7 @@
         </div>
         <div class="callout">
           <img src="assets/emote-bolt.png" width="38" height="38" alt="" />
-          <div><span class="cname">Working</span><span class="cwhy">Still working, with helper agents running too.</span></div>
+          <div><span class="cname">Working</span><span class="cwhy">Still working, with subagents running too.</span></div>
         </div>
         <div class="callout">
           <img src="assets/emote-sleep.png" width="38" height="38" alt="" />
@@ -351,7 +352,7 @@
       <section id="evolution" class="sec">
         <div class="sec-head">
           <h2>Evolution</h2>
-          <p class="support">Your Pokémon evolves by the same rules as the games. The difference is what sets it off: your real coding work.</p>
+          <p class="support">Your Pokémon evolves by the same rules as the games. Your real coding work is what sets it off.</p>
         </div>
         <div class="evo">
           <div class="evo-media">
@@ -364,11 +365,11 @@
             </div>
           </div>
           <div class="evo-ways">
-            <div class="evo-way"><span class="ew-name">Level</span><span class="ew-why">commits, merges, passing tests and sessions all add experience</span></div>
-            <div class="evo-way"><span class="ew-name">Stone</span><span class="ew-why">a stone you won from a gym badge, for the ones that need one</span></div>
-            <div class="evo-way"><span class="ew-name">Friendship</span><span class="ew-why">the days you show up, and the work you do. Day or night decides Espeon or Umbreon.</span></div>
-            <div class="evo-way"><span class="ew-name">Trade</span><span class="ew-why">a session passing work to a helper agent, holding an item if one is needed</span></div>
-            <p class="prog-close">Every Gen 1 and 2 evolution rule is in here, taken from Pok&eacute;API. Even Tyrogue, who picks its path from your commits against your passing tests.</p>
+            <div class="evo-way"><span class="ew-name">Level</span><span class="ew-why">Commits, merges, passing tests and sessions all give experience.</span></div>
+            <div class="evo-way"><span class="ew-name">Stone</span><span class="ew-why">Use a stone. Gym badges give you stones.</span></div>
+            <div class="evo-way"><span class="ew-name">Friendship</span><span class="ew-why">Work often, over many days. For Espeon and Umbreon, the time of day decides which one you get.</span></div>
+            <div class="evo-way"><span class="ew-name">Trade</span><span class="ew-why">When a session hands work to a subagent, that counts as a trade. A few Pok&eacute;mon also need to be holding the right item.</span></div>
+            <p class="prog-close">All the Gen 1 and 2 evolution rules are here, taken from Pok&eacute;API. Tyrogue too: your commits and your passing tests decide which one it becomes.</p>
           </div>
         </div>
       </section>
@@ -377,7 +378,7 @@
 
   <!-- 5. BADGES -->
   <div class="wrap">
-    <section id="badges" class="sec" style="padding-top:0">
+    <section id="badges" class="sec">
       <div class="sec-head">
         <h2>Earn badges as you code.</h2>
         <p class="support">Track your progress, from your first merge to 100 commits. Collect badges like a <b>Pokémon Master</b>.</p>
@@ -447,7 +448,7 @@
 
   <!-- 7. PRIVACY & OPEN SOURCE -->
   <div class="wrap">
-    <section id="privacy" class="sec" style="padding-top:0">
+    <section id="privacy" class="sec">
       <div class="sec-head">
         <h2>Runs on your Mac</h2>
       </div>
