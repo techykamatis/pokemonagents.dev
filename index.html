@@ -114,6 +114,18 @@
   .prog-list li b { color:var(--ink); font-weight:700; }
   .prog-close { font-size:var(--text-body); color:var(--ink-2); max-width:58ch; }
 
+  /* evolution: the same two-column read as the social card — the device on one
+     side, the four ways on the other. .device/.device-cam/.device-screen are
+     the hero's, reused as-is so the frame is identical. */
+  .evo { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(28px,5vw,64px); align-items:center; }
+  .evo-media { display:flex; justify-content:center; }
+  .evo-ways { display:grid; gap:clamp(14px,1.8vw,20px); }
+  .evo-way { display:grid; grid-template-columns:auto 1fr; gap:clamp(12px,1.4vw,18px); align-items:baseline; }
+  .ew-name { font-family:var(--font-pixel); font-size:12px; color:var(--accent); white-space:nowrap; }
+  .ew-why { font-size:var(--text-body); color:var(--ink-2); line-height:1.5; }
+  .evo-ways .prog-close { margin-top:6px; max-width:100%; }
+  @media (max-width:860px) { .evo { grid-template-columns:1fr; } }
+
   /* badges — a trainer's badge ledger: each real sprite beside what earns it,
      set straight on the paper like the in-game trainer card (which is light blue,
      not a dark panel). No card wrapper, no centered tile grid. */
@@ -264,18 +276,29 @@
   <!-- 4. PROGRESSION -->
   <div class="band">
     <div class="wrap">
-      <section class="sec">
+      <section id="evolution" class="sec">
         <div class="sec-head">
-          <h2>Your work helps your Pokémon grow</h2>
-          <p class="support">As you work on your projects, your Pokémon makes progress too.</p>
+          <h2>Evolution</h2>
+          <p class="support">Your Pokémon evolves by the same rules as the games. What changes is the trigger: your real coding work is what moves it along.</p>
         </div>
-        <ul class="prog-list">
-          <li><b>Gain experience</b> as your coding sessions progress.</li>
-          <li><b>Earn badges</b> for completing different milestones.</li>
-          <li><b>Evolve your Pokémon</b> as it meets the requirements.</li>
-          <li><b>Find shiny Pokémon</b> and see which Pokémon your projects get.</li>
-        </ul>
-        <p class="prog-close">Your Pokémon's progress is connected to your coding activity.</p>
+        <div class="evo">
+          <div class="evo-media">
+            <div class="device">
+              <div class="device-cam"></div>
+              <div class="device-screen">
+                <img src="assets/pokemon-agents-evolution.gif" width="640" height="576" loading="lazy"
+                     alt="A project's Charmeleon reaches level 36 from real commits and evolves into Charizard, then walks back into the town." />
+              </div>
+            </div>
+          </div>
+          <div class="evo-ways">
+            <div class="evo-way"><span class="ew-name">Level</span><span class="ew-why">commits, merges, green test runs, sessions and tool calls all add experience</span></div>
+            <div class="evo-way"><span class="ew-name">Stone</span><span class="ew-why">earned from a gym badge, for the Pokémon that evolve by stone</span></div>
+            <div class="evo-way"><span class="ew-name">Friendship</span><span class="ew-why">active days, sessions and commits &mdash; day and night tell Espeon and Umbreon apart</span></div>
+            <div class="evo-way"><span class="ew-name">Trade</span><span class="ew-why">a session handing work to a subagent, holding an item where one is needed</span></div>
+            <p class="prog-close">Every Gen 1 and 2 evolution rule is in here, straight from Pok&eacute;API &mdash; right down to Tyrogue, who branches on your commits against your green tests.</p>
+          </div>
+        </div>
       </section>
     </div>
   </div>
